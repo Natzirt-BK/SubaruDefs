@@ -1,0 +1,36 @@
+A2WC412I overrun mappings
+Vehicle: 2005 USDM Subaru Forester XT MT
+ECU ID: 3B12584306
+CPU: Renesas SH7058 / SH-2E
+
+Scalars
+0x0C6548  Overrun Initial Enrichment Activation (Max. RPM Delta)
+0x0C654C  Overrun Initial Enrichment
+0x0C6568  Overrun Fueling Resume/Cut RPM Adder (Max. RPM Delta)(MT)
+0x0C6570  Overrun Fueling Resume/Cut RPM Adder (Low Vehicle Speed) Activation (Max. Vehicle Speed)
+0x0C6574  Overrun Fueling Resume/Cut RPM Adder (Max. RPM Delta) Activation Threshold (MT)
+0x0C659C  Overrun Fueling Resume/Cut RPM Adder (Stationary/Low Vehicle Speed)
+
+Descriptors
+0x082E38  Overrun Fueling Resume/Cut RPM Base
+            data: 0x0C7384
+            ECT axis: 0x0C66D0
+
+0x082E4C  Overrun Fuel Cut Counter Threshold RPM Ranges
+            data: 0x0C73C4
+            RPM axis: 0x0C73A4
+
+0x082E78  Overrun Fueling Resume RPM Thresholds
+            data: 0x0C742E
+            ECT axis: 0x0C66D0
+
+Storage / scaling
+0x0C6548  float32 big endian, RPM
+0x0C654C  float32 big endian, x*.001 ms
+0x0C6568  float32 big endian, RPM
+0x0C6570  float32 big endian, km/h
+0x0C6574  float32 big endian, RPM
+0x0C659C  float32 big endian, RPM
+0x0C7384  uint16 big endian, x*0.1953125 RPM
+0x0C73C4  uint16 big endian counter
+0x0C742E  uint16 big endian, x*0.1953125 RPM

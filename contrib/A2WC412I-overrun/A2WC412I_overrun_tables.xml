@@ -1,0 +1,76 @@
+<!--
+A2WC412I overrun fueling table entries.
+These are intended for review/integration into the proper RomRaider definition inheritance level.
+They are not a complete standalone ECU definition.
+-->
+<table name="Overrun Initial Enrichment Activation (Max. RPM Delta)" category="Fueling - OverRun" userlevel="1" endian="big" sizey="1" storageaddress="0x0C6548" storagetype="float" type="2D">
+  <scaling coarseincrement="10.0" fineincrement="1.0" format="0" expression="x" to_byte="x" units="RPM" />
+  <table name="Activation Threshold" sizey="1" type="Static Y Axis">
+    <data>Max. RPM Delta</data>
+  </table>
+  <description>If the filtered RPM delta during overrun (tip-out) is less than this threshold, Overrun Initial Enrichment may be applied.</description>
+</table>
+
+<table name="Overrun Initial Enrichment" category="Fueling - OverRun" userlevel="1" endian="big" sizey="1" storageaddress="0x0C654C" storagetype="float" type="2D">
+  <scaling coarseincrement="0.1" fineincrement="0.01" format="0.000" expression="x*.001" to_byte="x/.001" units="ms" />
+  <table name="Initial Enrichment" sizey="1" type="Static Y Axis">
+    <data>Initial Enrichment</data>
+  </table>
+  <description>Initial enrichment applied when entering overrun conditions (tip-out), before fuel is cut, when the activation conditions are met.</description>
+</table>
+
+<table name="Overrun Fueling Resume/Cut RPM Adder (Max. RPM Delta)(MT)" category="Fueling - OverRun" userlevel="1" endian="big" sizey="1" storageaddress="0x0C6568" storagetype="float" type="2D">
+  <scaling coarseincrement="100.0" fineincrement="10.0" format="0" expression="x" to_byte="x" units="RPM" />
+  <table name="RPM Adder" sizey="1" type="Static Y Axis">
+    <data>Max. RPM Delta Adder</data>
+  </table>
+  <description>Added to the coolant-based Overrun Fueling Resume/Cut RPM Base when the filtered RPM delta is less than the Max. RPM Delta activation threshold and the routine's additional manual-transmission strategy gates are active.</description>
+</table>
+
+<table name="Overrun Fueling Resume/Cut RPM Adder (Low Vehicle Speed) Activation (Max. Vehicle Speed)" category="Fueling - OverRun" userlevel="2" endian="big" sizey="1" storageaddress="0x0C6570" storagetype="float" type="2D">
+  <scaling coarseincrement="5.0" fineincrement="1.0" format="0" expression="x" to_byte="x" units="Vehicle Speed (KMH)" />
+  <table name="Activation Threshold" sizey="1" type="Static Y Axis">
+    <data>Max. Vehicle Speed</data>
+  </table>
+  <description>When processed vehicle speed is below this threshold, the Stationary/Low Vehicle Speed RPM adder is added to the calculated overrun fueling resume/cut threshold. Stock A2WC412I uses 15 km/h.</description>
+</table>
+
+<table name="Overrun Fueling Resume/Cut RPM Adder (Max. RPM Delta) Activation Threshold (MT)" category="Fueling - OverRun" userlevel="1" endian="big" sizey="1" storageaddress="0x0C6574" storagetype="float" type="2D">
+  <scaling coarseincrement="10.0" fineincrement="1.0" format="0" expression="x" to_byte="x" units="RPM" />
+  <table name="Activation Threshold" sizey="1" type="Static Y Axis">
+    <data>Max. RPM Delta</data>
+  </table>
+  <description>When filtered RPM delta is less than this threshold and the routine's additional manual-transmission strategy gates are active, the Max. RPM Delta RPM adder is added to the calculated overrun fueling resume/cut threshold.</description>
+</table>
+
+<table name="Overrun Fueling Resume/Cut RPM Adder (Stationary/Low Vehicle Speed)" category="Fueling - OverRun" userlevel="2" endian="big" sizey="1" storageaddress="0x0C659C" storagetype="float" type="2D">
+  <scaling coarseincrement="100.0" fineincrement="10.0" format="0" expression="x" to_byte="x" units="RPM" />
+  <table name="RPM Adder" sizey="1" type="Static Y Axis">
+    <data>Low Vehicle Speed RPM Adder</data>
+  </table>
+  <description>Added to the coolant-based Overrun Fueling Resume/Cut RPM Base when processed vehicle speed is below the Low Vehicle Speed Max. Vehicle Speed activation threshold. Other separately stored conditional adders can also contribute to the final threshold.</description>
+</table>
+
+<table name="Overrun Fueling Resume/Cut RPM Base" category="Fueling - OverRun" userlevel="1" endian="big" sizey="16" storageaddress="0x0C7384" storagetype="uint16" type="2D" descriptoraddress="0x082E38">
+  <scaling coarseincrement="100.0" fineincrement="10.0" format="0.0" expression="x*0.1953125" to_byte="x/0.1953125" units="RPM" />
+  <table name="Coolant Temperature" sizey="16" storageaddress="0x0C66D0" storagetype="float" type="Y Axis">
+    <scaling coarseincrement="5.0" fineincrement="1.0" format="0" expression="x" to_byte="x" units="degrees C" />
+  </table>
+  <description>Coolant-temperature-based overrun fueling resume/cut RPM base. The ECU adds active conditional RPM adders to this lookup result and compares the calculated threshold with engine speed; other overrun state and delay conditions also apply.</description>
+</table>
+
+<table name="Overrun Fuel Cut Counter Threshold RPM Ranges" category="Fueling - OverRun" userlevel="1" endian="big" sizey="8" storageaddress="0x0C73C4" storagetype="uint16" type="2D" descriptoraddress="0x082E4C">
+  <scaling coarseincrement="5.0" fineincrement="1.0" format="0" expression="x" to_byte="x" units="Counter" />
+  <table name="Engine Speed" sizey="8" storageaddress="0x0C73A4" storagetype="float" type="Y Axis">
+    <scaling coarseincrement="1000.0" fineincrement="100.0" format="0" expression="x" to_byte="x" units="RPM" />
+  </table>
+  <description>RPM ranges used to determine the counter threshold that controls when fuel cut occurs during overrun conditions. Stock A2WC412I uses a counter threshold of 25 at each RPM breakpoint.</description>
+</table>
+
+<table name="Overrun Fueling Resume RPM Thresholds" category="Fueling - OverRun" userlevel="1" endian="big" sizey="16" storageaddress="0x0C742E" storagetype="uint16" type="2D" descriptoraddress="0x082E78">
+  <scaling coarseincrement="100.0" fineincrement="1.0" format="0.0" expression="x*0.1953125" to_byte="x/0.1953125" units="RPM" />
+  <table name="Coolant Temperature" sizey="16" storageaddress="0x0C66D0" storagetype="float" type="Y Axis">
+    <scaling coarseincrement="5.0" fineincrement="1.0" format="0" expression="x" to_byte="x" units="degrees C" />
+  </table>
+  <description>When RPM is less than or equal to this coolant-temperature-based threshold, the potential for fueling to resume during overrun fuel cut is increased; other ECU conditions also apply.</description>
+</table>
