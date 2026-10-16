@@ -6,10 +6,23 @@ This repository is used to develop Subaru ECU definitions for use with:
 
 Discussion thread at RomRaider for this repo: http://www.romraider.com/forum/viewtopic.php?f=34&t=8635
 
-# Branches:
-*	Stable branch: Contains the latest NON-experimental definitions. These definitions have been thoroughly debugged and tested.
-*	Beta branch: Formerly "Experimental". Contains definitions with finalized 'bases' that are newly defined for a particular rom. Considered safe for use by advanced users.
-*	Alpha branch: Contains definitions that are under active development. **DO NOT USE THIS BRANCH UNLESS YOU ARE A DEVELOPER OR A DEVELOPER'S TESTER**
+# Branches (verified October 16, 2026)
+
+This fork currently has **three branches**. Branch names are not a guarantee
+of current vehicle support, correctness, or hardware validation.
+
+* **Stable** (default): historical non-experimental baseline; latest commit
+  August 20, 2012. Do not assume it contains recent definitions.
+* **Alpha**: historical experimental definitions; latest commit October 12,
+  2017. Intended for developers and testers, not general vehicle use.
+* **a2wc412i-overrun**: experimental A2WC412I overrun fueling mappings, last
+  updated August 18, 2026. **Not promoted to Stable or hardware-qualified by
+  virtue of being present here.**
+
+Older upstream instructions refer to a **Beta** branch, but this fork currently
+has no Beta branch. Check the exact ROM ID, definition revision and validation
+evidence before using a definition. Do not substitute an experimental branch
+for the default branch without an explicit reason.
 
 Benefits of using Git:
 *	Better tracking of definition history/changes.
