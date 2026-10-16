@@ -11,8 +11,9 @@ Discussion thread at RomRaider for this repo: http://www.romraider.com/forum/vie
 This fork currently has **three branches**. Branch names are not a guarantee
 of current vehicle support, correctness, or hardware validation.
 
-* **Stable** (default): historical non-experimental baseline; latest commit
-  August 20, 2012. Do not assume it contains recent definitions.
+* **Stable** (default): historical non-experimental definition baseline
+  from 2012. The October 2026 README refresh does not add or validate newer
+  ECU definitions. Do not assume it contains recent definitions.
 * **Alpha**: historical experimental definitions; latest commit October 12,
   2017. Intended for developers and testers, not general vehicle use.
 * **a2wc412i-overrun**: experimental A2WC412I overrun fueling mappings, last
